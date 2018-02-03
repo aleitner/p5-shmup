@@ -1,7 +1,8 @@
-function Player(x, y) {
+function Enemy(x, y, stats) {
+  const _stats = Object.assign({}, stats);
   this.ship = new Ship(x, y);
-  this.lives = 3;
-  this.health = 100;
+  this.health = _stats.health || 100;
+  this.direction = LEFT;
 
   this.move = function(direction) {
     let x = 0;
@@ -39,10 +40,30 @@ function Player(x, y) {
   }
 
   this.shoot = function() {
-    this.ship.shoot(UP);
+    this.ship.shoot(DOWN);
   }
 
   this.rotateWeapon = function() {
     this.ship.rotateWeapon();
+  }
+
+  this.automateMovement = function () {
+    if (this.direction === LEFT) {
+      if (this.ship.x <= 10) {
+        this.direction = RIGHT;
+      } else {
+        this.move(LEFT);
+      }
+    } else {
+      this.move(RIGHT);
+
+      if (this.ship.x >= 390) {
+        this.direction = LEFT;
+      }
+    }
+  }
+
+  this.setDirection = function (dir) {
+    this.direction = dir;
   }
 }

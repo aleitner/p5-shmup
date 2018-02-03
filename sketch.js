@@ -2,6 +2,8 @@ var player;
 var enemies = [];
 var stars = [];
 var starCount = 400;
+var currentLevel = 0;
+var level = new Level(currentLevel);
 
 function preload() {
 }
@@ -33,6 +35,8 @@ function draw() {
   }
 
   player.display();
+  spawn();
+  automateEnemies();
 }
 
 function keyPressed() {
@@ -58,4 +62,28 @@ function moveStarField() {
     stars[i].move();
     stars[i].display();
   }
+}
+
+function spawn() {
+  if (level.loaded === false) {
+    for (i=0; i < level.position.length; i++) {
+      let x = level.position[i].x;
+      let y = level.position[i].y;
+
+      enemies.push(new Enemy(x, y));
+    }
+    level.loaded = true;
+  }
+}
+
+function automateEnemies () {
+  enemies.forEach(enemy => enemy.automateMovement());
+  enemies.forEach(enemy => enemy.display());
+  enemies.forEach(enemy => {
+    enemy.ship.weapons.forEach(weapon => {
+      if (weapon.firing === false) {
+        enemy.shoot();
+      }
+    });
+  });
 }

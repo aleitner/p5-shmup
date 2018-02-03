@@ -21,6 +21,7 @@ function defaultWeapon() {
             this.shots[i].y += this.bulletSpeed;
           } else {
             this.shots.splice(i, 1);
+            this.firing = false;
           }
           break;
         case UP:
@@ -28,6 +29,7 @@ function defaultWeapon() {
             this.shots[i].y -= this.bulletSpeed;
           } else {
             this.shots.splice(i, 1);
+            this.firing = false;
           }
           break;
       }
