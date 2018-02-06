@@ -1,6 +1,7 @@
 function Ship(x, y) {
   this.x = x;
   this.y = y;
+  this.r = 5
   this.speed = 3;
   this.weapons = [new defaultWeapon()];
 
@@ -33,6 +34,15 @@ function Ship(x, y) {
   }
 
   this.display = function() {
-    ellipse(this.x, this.y, 10, 10);
+    ellipse(this.x, this.y, 2*this.r, 2*this.r);
+  }
+
+  this.collidesWith = function(object) {
+    var distance = dist(this.x, this.y, object.x, object.y);
+    if (dist < object.r + this.r) {
+      return true;
+    }
+
+    return false;
   }
 }

@@ -37,6 +37,7 @@ function draw() {
   player.display();
   spawn();
   automateEnemies();
+  checkCollisions();
 }
 
 function keyPressed() {
@@ -76,7 +77,7 @@ function spawn() {
   }
 }
 
-function automateEnemies () {
+function automateEnemies() {
   enemies.forEach(enemy => enemy.automateMovement());
   enemies.forEach(enemy => enemy.display());
   enemies.forEach(enemy => {
@@ -86,4 +87,22 @@ function automateEnemies () {
       }
     });
   });
+}
+
+function checkCollisions() {
+  for (i = 0; i < player.ship.weapons.length; i++ ) {
+    for (j = 0; j < player.ship.weapons[i].shots.length; j++) {
+      for (k = 0; k < enemies.length; k++) {
+        if (player.ship.weapons[i].shots[j].collidesWith(enemies[k].ship)) {
+          enemies[k].health -= 10;
+          console.log('collision');
+
+
+          if (enemies[k].health <= 0 && enemies[k].ship.weapons[i].shots.length == 0) {
+            enemies.splice(k, 1);
+          }
+        }
+      }
+    }
+  }
 }

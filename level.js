@@ -4,7 +4,7 @@ function Level(current) {
       loaded: false,
       victory: false,
       enemies: {
-        health: 100,
+        health: 10,
         power: 5,
       },
       position: [
