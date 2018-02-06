@@ -9,8 +9,8 @@ function Level(current) {
       },
       position: [
         // generate 1 enemy
-        { x: 150, y: 20 },
-        { x: 160, y: 30 }
+        { x: 100, y: 20 },
+        { x: 300, y: 50 }
       ]
     }
   };

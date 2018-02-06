@@ -1,7 +1,7 @@
 function Enemy(x, y, stats) {
   const _stats = Object.assign({}, stats);
   this.ship = new Ship(x, y);
-  this.health = _stats.health || 100;
+  this.health = _stats.health || 10;
   this.direction = LEFT;
 
   this.move = function(direction) {
@@ -40,7 +40,9 @@ function Enemy(x, y, stats) {
   }
 
   this.shoot = function() {
-    this.ship.shoot(DOWN);
+    if (this.health > 0) {
+      this.ship.shoot(DOWN);
+    }
   }
 
   this.rotateWeapon = function() {

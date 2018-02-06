@@ -40,7 +40,8 @@ function defaultWeapon() {
 
   this.displayShots = function() {
     for (i = 0; i < this.shots.length; i++) {
-        rect(this.shots[i].x, this.shots[i].y, this.shots[i].r*2, this.shots[i].r*2);
+      fill(255, 204, 0);
+      rect(this.shots[i].x, this.shots[i].y, this.shots[i].r*2, this.shots[i].r*2);
     }
   }
 
@@ -51,4 +52,14 @@ function defaultShot(x, y, direction) {
   this.y = y;
   this.r = 2;
   this.direction = direction;
+
+  this.collidesWith = function(object) {
+    var distance = dist(this.x, this.y, object.x, object.y);
+
+    if (distance < object.r + this.r) {
+      return true;
+    }
+
+    return false;
+  }
 }

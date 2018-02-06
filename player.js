@@ -1,7 +1,7 @@
 function Player(x, y) {
   this.ship = new Ship(x, y);
   this.lives = 3;
-  this.health = 100;
+  this.health = 10;
 
   this.move = function(direction) {
     let x = 0;
@@ -39,7 +39,9 @@ function Player(x, y) {
   }
 
   this.shoot = function() {
-    this.ship.shoot(UP);
+    if (this.health > 0) {
+      this.ship.shoot(UP);
+    }
   }
 
   this.rotateWeapon = function() {

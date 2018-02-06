@@ -15,6 +15,13 @@ function setup() {
 }
 
 function draw() {
+
+  if (player.health <= 0) {
+    textSize(32);
+    text('You Lose', 130, 200);
+    return;
+  }
+
   background(0);
   moveStarField();
 
@@ -95,12 +102,20 @@ function checkCollisions() {
       for (k = 0; k < enemies.length; k++) {
         if (player.ship.weapons[i].shots[j].collidesWith(enemies[k].ship)) {
           enemies[k].health -= 10;
-          console.log('collision');
-
 
           if (enemies[k].health <= 0 && enemies[k].ship.weapons[i].shots.length == 0) {
             enemies.splice(k, 1);
           }
+        }
+      }
+    }
+  }
+
+  for (l = 0; l < enemies.length; l++) {
+    for (m = 0; m < enemies[l].ship.weapons.length; m++ ) {
+      for (n = 0; n < enemies[l].ship.weapons[m].shots.length; n++) {
+        if (enemies[l].ship.weapons[m].shots[n].collidesWith(player.ship)) {
+          player.health -= 10;
         }
       }
     }

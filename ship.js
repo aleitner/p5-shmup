@@ -34,6 +34,7 @@ function Ship(x, y) {
   }
 
   this.display = function() {
+    fill(255);
     ellipse(this.x, this.y, 2*this.r, 2*this.r);
   }
 
