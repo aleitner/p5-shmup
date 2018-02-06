@@ -40,7 +40,7 @@ function Ship(x, y) {
 
   this.collidesWith = function(object) {
     var distance = dist(this.x, this.y, object.x, object.y);
-    if (dist < object.r + this.r) {
+    if (distance < object.r + this.r) {
       return true;
     }
 

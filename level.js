@@ -1,6 +1,6 @@
 function Level(current) {
   const levels = {
-    0: {
+    1: {
       loaded: false,
       victory: false,
       enemies: {

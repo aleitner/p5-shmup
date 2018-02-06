@@ -2,7 +2,7 @@ var player;
 var enemies = [];
 var stars = [];
 var starCount = 400;
-var currentLevel = 0;
+var currentLevel = 1;
 var level = new Level(currentLevel);
 
 function preload() {
@@ -41,10 +41,12 @@ function draw() {
     player.move(DOWN);
   }
 
-  player.display();
   spawn();
-  automateEnemies();
   checkCollisions();
+  automateEnemies();
+
+  player.display();
+
 }
 
 function keyPressed() {
@@ -97,6 +99,17 @@ function automateEnemies() {
 }
 
 function checkCollisions() {
+  for (h = 0; h < enemies.length; h++) {
+    if (player.ship.collidesWith(enemies[h].ship)) {
+      player.health -= 10;
+      enemies[h].health -= 10;
+
+      if (enemies[h].health <= 0) {
+        enemies.splice(h, 1);
+      }
+    }
+  }
+
   for (i = 0; i < player.ship.weapons.length; i++ ) {
     for (j = 0; j < player.ship.weapons[i].shots.length; j++) {
       for (k = 0; k < enemies.length; k++) {
